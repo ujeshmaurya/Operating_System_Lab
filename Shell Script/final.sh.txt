@@ -1,0 +1,95 @@
+NUM=1
+while [ $NUM -lt 15 ]
+do
+	echo "++++++++++++++++++++++++++++++++++++++++++++++++++"
+	echo "=================================================="
+	echo "++++++++++++++++++++++++++++++++++++++++++++++++++"
+	echo "                Welcome to Shell                  "
+    echo "         Enter a number between 1 and 15.         "
+	echo "Press 1: for list of all items in current directory"					#ls
+	echo "Press 2: for changing the current directory"							#cd
+	echo "Press 3: for locating a file"											#locate
+	echo "Press 4: to clear terminal screen"									#clear
+	echo "Press 5: for creating a new file"										#touch
+	echo "Press 6: for moving a file"											#mv
+	echo "Press 7: for deleting an empty folder"								#rmdir
+	echo "Press 8: for changing mode/permissions of a file"						#chmod
+	echo "Press 9: to search for a pattern in a file"							#grep
+	echo "Press 10: for list of all items in current directory(with details)"	#ll
+	echo "Press 11: for manual page of any command"								#man
+	echo "Press 12: for copying a file"											#cp
+	echo "Press 13: for removing a file"										#rm
+	echo "Press 14: for creating a new directory/folder"						#mkdir
+	echo "Press 15: to exit the Shell"											#break while loop
+	echo "++++++++++++++++++++++++++++++++++++++++++++++++++"
+	echo "=================================================="
+	echo "++++++++++++++++++++++++++++++++++++++++++++++++++"
+	read NUM
+
+	case $NUM in
+		1) ls ;;
+
+		2) echo "Enter a directory name or '..' for previous directory"
+		   read directory
+		   cd "$directory";;
+
+		3) echo "Enter something to search"
+		   read directory
+		   #sudo updatedb
+		   locate "$directory";;
+
+		4) clear ;;
+
+		5) echo "Enter a directory(with filename) to create file"
+		   read directory
+		   touch "$directory";;
+
+		6) echo "Enter the source path"
+		   read src
+		   echo "Enter the destination path"
+		   read dest
+		   mv "$src" "$dest";;
+
+		7) echo "Enter a directory to remove"
+		   read directory
+		   rmdir "$directory";;
+
+		8) echo "Enter a 3 digit octal value for granting permission"
+		   echo "You can also enter in this format {u=rwx,g=rwx,o=rwx}"
+		   read octal
+		   echo "Enter a directory(with filename)"
+		   read directory
+		   chmod "$octal" "$directory";;
+
+		9) echo "Enter a pattern to search"
+		   read pattern
+		   echo "Enter a directory(with filename)"
+		   read directory
+		   grep "$pattern" "$directory";;
+
+		10) ls -la ;;
+
+		11) echo "Enter something to search"
+		    read interface
+		    man "$interface";;
+
+		12) echo "Enter the source path"
+		    read src
+		    echo "Enter the destination path"
+		    read dest
+		    cp "$src" "$dest";;
+
+		13) echo "Enter a directory(with filename) to delete"
+		    read directory
+		    rm "$directory";;
+
+		14) echo "Enter a name to create directory"
+		    read name
+		    mkdir "$name";;
+
+		15) echo "Exiting Shell.." ;;
+
+		*) echo "INVALID NUMBER!" ;;
+
+	esac
+done
